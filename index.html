@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Responsive Image Gallery with Lightbox & Filters</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Image Gallery</h1>
+
+    <div class="controls">
+      <div class="filter-categories" role="toolbar" aria-label="Filter by category">
+        <button class="category-btn active" data-category="all" aria-pressed="true">All</button>
+        <button class="category-btn" data-category="nature">Nature</button>
+        <button class="category-btn" data-category="architecture">Architecture</button>
+        <button class="category-btn" data-category="people">People</button>
+        <button class="category-btn" data-category="food">Food</button>
+      </div>
+
+      <label class="filter-select">
+        Filter:
+        <select id="imageFilter" aria-label="Image filter">
+          <option value="none">None</option>
+          <option value="grayscale(100%)">Grayscale</option>
+          <option value="sepia(60%)">Sepia</option>
+          <option value="blur(2px)">Blur</option>
+          <option value="contrast(1.2) saturate(1.2)">Vivid</option>
+        </select>
+      </label>
+    </div>
+  </header>
+
+  <!-- Featured slideshow -->
+  <section class="featured">
+    <button class="feat-nav prev" id="featPrev" aria-label="Previous featured image">‹</button>
+    <div class="featured-inner">
+      <img id="featuredImage" src="https://picsum.photos/id/1015/1000/600" alt="Featured">
+      <div class="featured-caption" id="featuredCaption">Mountain lake — Nature</div>
+    </div>
+    <button class="feat-nav next" id="featNext" aria-label="Next featured image">›</button>
+  </section>
+
+  <!-- Gallery -->
+  <main class="container">
+    <div class="gallery" id="gallery">
+      <!-- Each gallery item has data-category and a caption. Thumbnails from picsum.photos -->
+      <figure class="gallery-item" data-index="0" data-category="nature">
+        <img src="https://picsum.photos/id/1015/600/400" alt="Mountain lake" />
+        <figcaption>Mountain lake</figcaption>
+      </figure>
+
+      <figure class="gallery-item" data-index="1" data-category="architecture">
+        <img src="https://picsum.photos/id/1011/600/400" alt="Modern building" />
+        <figcaption>Modern building</figcaption>
+      </figure>
+
+      <figure class="gallery-item" data-index="2" data-category="people">
+        <img src="https://picsum.photos/id/1012/600/400" alt="Portrait" />
+        <figcaption>Portrait</figcaption>
+      </figure>
+
+      <figure class="gallery-item" data-index="3" data-category="nature">
+        <img src="https://picsum.photos/id/1020/600/400" alt="Forest path" />
+        <figcaption>Forest path</figcaption>
+      </figure>
+
+      <figure class="gallery-item" data-index="4" data-category="food">
+        <img src="https://picsum.photos/id/1080/600/400" alt="Delicious food" />
+        <figcaption>Delicious food</figcaption>
+      </figure>
+
+      <figure class="gallery-item" data-index="5" data-category="architecture">
+        <img src="https://picsum.photos/id/1005/600/400" alt="Historic arch" />
+        <figcaption>Historic arch</figcaption>
+      </figure>
+
+      <figure class="gallery-item" data-index="6" data-category="people">
+        <img src="https://picsum.photos/id/1001/600/400" alt="Street portrait" />
+        <figcaption>Street portrait</figcaption>
+      </figure>
+
+      <figure class="gallery-item" data-index="7" data-category="nature">
+        <img src="https://picsum.photos/id/1003/600/400" alt="Seaside cliffs" />
+        <figcaption>Seaside cliffs</figcaption>
+      </figure>
+
+      <figure class="gallery-item" data-index="8" data-category="food">
+        <img src="https://picsum.photos/id/1081/600/400" alt="Dessert" />
+        <figcaption>Dessert</figcaption>
+      </figure>
+
+      <!-- Add more items as desired; ensure data-index increments -->
+    </div>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image lightbox">
+    <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous image">‹</button>
+    <div class="lb-content">
+      <img id="lbImage" src="" alt="" />
+      <div class="lb-caption" id="lbCaption"></div>
+    </div>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Next image">›</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
