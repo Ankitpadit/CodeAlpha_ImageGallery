@@ -1,4 +1,4 @@
-// Gallery script: featured slideshow, lightbox, filters
+
 document.addEventListener('DOMContentLoaded', () => {
   const gallery = Array.from(document.querySelectorAll('.gallery-item'));
   const featuredImage = document.getElementById('featuredImage');
@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const featPrev = document.getElementById('featPrev');
   const featNext = document.getElementById('featNext');
 
-  // Lightbox elements
+
   const lb = document.getElementById('lightbox');
   const lbImage = document.getElementById('lbImage');
   const lbCaption = document.getElementById('lbCaption');
@@ -14,13 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const lbPrev = document.getElementById('lbPrev');
   const lbNext = document.getElementById('lbNext');
 
-  // Filters and categories
   const categoryBtns = document.querySelectorAll('.category-btn');
   const imageFilterSelect = document.getElementById('imageFilter');
 
   let currentIndex = 0;
 
-  // Build an array of image data from the DOM
   const items = gallery.map(el => {
     const img = el.querySelector('img');
     const caption = el.querySelector('figcaption')?.innerText || '';
@@ -34,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   });
 
-  // Helper: show featured image
+
   function showFeatured(index){
     currentIndex = (index + items.length) % items.length;
     const item = items[currentIndex];
@@ -53,14 +51,14 @@ document.addEventListener('DOMContentLoaded', () => {
   featPrev.addEventListener('click', () => showFeatured(currentIndex - 1));
   featNext.addEventListener('click', () => showFeatured(currentIndex + 1));
 
-  // Click a gallery item -> open lightbox
+
   items.forEach((it, idx) => {
     it.el.addEventListener('click', () => {
       openLightbox(idx);
     });
   });
 
-  // Lightbox functions
+
   function openLightbox(index){
     index = (index + items.length) % items.length;
     lb.setAttribute('aria-hidden','false');
@@ -86,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
   lbPrev.addEventListener('click', () => showLightbox(currentIndex - 1));
   lbNext.addEventListener('click', () => showLightbox(currentIndex + 1));
 
-  // keyboard support
+
   document.addEventListener('keydown', (e) => {
     if (lb.getAttribute('aria-hidden') === 'false') {
       if (e.key === 'Escape') closeLightbox();
@@ -99,12 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Clicking outside image in lightbox closes
+
   lb.addEventListener('click', (e) => {
     if (e.target === lb) closeLightbox();
   });
 
-  // Category filtering
+
   categoryBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       categoryBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
@@ -128,26 +126,25 @@ document.addEventListener('DOMContentLoaded', () => {
     if (visible >= 0) showFeatured(visible);
   }
 
-  // Image filter select (CSS filters)
+
   imageFilterSelect.addEventListener('change', applyCssFilterToAll);
 
   function applyCssFilterToAll(){
     const filterValue = imageFilterSelect.value;
-    // thumbnails
+
     document.querySelectorAll('.gallery-item img').forEach(img => {
       img.style.filter = filterValue === 'none' ? '' : filterValue;
     });
-    // Featured and lightbox images:
+
     featuredImage.style.filter = filterValue === 'none' ? '' : filterValue;
     lbImage.style.filter = filterValue === 'none' ? '' : filterValue;
   }
 
-  // Utility
   function capitalize(s='') {
     return s.charAt(0).toUpperCase() + s.slice(1);
   }
 
-  // Initialize: show first featured image
+
   showFeatured(0);
   applyCssFilterToAll();
 
